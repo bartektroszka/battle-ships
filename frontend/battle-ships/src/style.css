@@ -3,6 +3,13 @@
   height: 40px;
 }
 
+.available {
+  width: 40px;
+  height: 40px;
+  background-color: seagreen;
+  display: flex;
+}
+
 .container {
   display: flex;
   margin: 10px;
@@ -13,7 +20,6 @@
   width: 400px;
   height: 400px;
   margin: 10px;
-  justify-content: space-between;
 }
 .your-ships {
   background-color: grey;

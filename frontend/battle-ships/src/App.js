@@ -87,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const shipsCollide = (shipOne, shipTwo) => {
+    console.log(shipOne, shipTwo);
     return (
       shipOne.takenIds.filter((value) => shipTwo.takenIds.includes(value)) != 0
     );
@@ -112,8 +113,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const dragShip = (shipBeginId, shipLastId) => {
-    step = vertical ? 10 : 1;
-    draggedShipInList.takenIds = range(shipBeginId, shipLastId, step);
     if (!dragAllowed(shipBeginId, shipLastId)) {
       return;
     } else {
@@ -142,9 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
     shipLength = draggedShip.children.length;
   };
 
-  const dragDrop = (e) => {
-    //if our ship is vertical:
-    shipBeginId = parseInt(e.target.id);
+  const computeEdges = (e) => {
     if (shipName.slice(-3) == "ver") {
       shipLastId =
         width * (shipLength - 1) + parseInt(e.target.id) - width * offset;
@@ -153,7 +150,16 @@ document.addEventListener("DOMContentLoaded", () => {
       shipBeginId = parseInt(e.target.id) - offset;
       shipLastId = shipLength - 1 + parseInt(e.target.id) - offset;
     }
-    dragShip(shipBeginId, shipLastId);
+    return [shipBeginId, shipLastId];
+  };
+
+  const dragDrop = (e) => {
+    dragShip(...computeEdges(e));
+    userGrid.childNodes.forEach((node) => {
+      if (node.className == "" || node.className == "available") {
+        node.removeAttribute("class");
+      }
+    });
   };
 
   const dragOver = (e) => {
@@ -161,7 +167,24 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const dragEnter = (e) => {
-    e.preventDefault();
+    [shipBeginId, shipLastId] = computeEdges(e);
+    step = vertical ? 10 : 1;
+    draggedShipInList.takenIds = range(shipBeginId, shipLastId, step);
+    userGrid.childNodes.forEach((node) => {
+      if (node.className == "" || node.className == "available") {
+        node.removeAttribute("class");
+      }
+    });
+    for (let i = 0; i < shipLength; i++) {
+      let step = vertical ? 10 : 1;
+      let index = shipBeginId + step * i;
+      let node = userGrid.childNodes[index];
+      if (node && node.className == "") {
+        if (dragAllowed(shipBeginId, shipLastId)) {
+          node.setAttribute("class", "available");
+        }
+      }
+    }
   };
 
   const dragLeave = (e) => {
@@ -182,17 +205,17 @@ document.addEventListener("DOMContentLoaded", () => {
   let shipName;
 
   createBoard(userGrid, userFields);
+
   userFields.forEach((field) => field.addEventListener("dragstart", dragStart));
   userFields.forEach((field) => field.addEventListener("dragover", dragOver));
   userFields.forEach((field) => field.addEventListener("dragenter", dragEnter));
   userFields.forEach((field) => field.addEventListener("dragleave", dragLeave));
   userFields.forEach((field) => field.addEventListener("drop", dragDrop));
   userFields.forEach((field) => field.addEventListener("dragend", dragEnd));
-
   ships.forEach((ship) => ship.addEventListener("dragstart", dragStart));
-  ships.forEach((ship) =>
+  ships.forEach((ship) => {
     ship.addEventListener("mousedown", (e) => {
       selectedShipId = e.target.id;
-    })
-  );
+    });
+  });
 });
