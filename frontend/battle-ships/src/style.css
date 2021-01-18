@@ -1,0 +1,105 @@
+.grid div {
+  width: 40px;
+  height: 40px;
+}
+
+.container {
+  display: flex;
+  margin: 10px;
+}
+
+.deploy-ships {
+  background-color: white;
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+  justify-content: space-between;
+}
+.your-ships {
+  background-color: grey;
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ship div {
+  width: 40px;
+  height: 40px;
+}
+
+.taken div {
+  width: 40px;
+  height: 40px;
+}
+
+.ship-container {
+  margin: 10px;
+}
+
+.shortest {
+  width: 80px;
+  height: 40px;
+  display: flex;
+  background-color: hotpink;
+}
+
+.shortest-ver {
+  width: 40px;
+  height: 80px;
+  background-color: hotpink;
+  flex-wrap: wrap;
+  display: inline-block;
+}
+
+.short {
+  width: 120px;
+  height: 40px;
+  background-color: yellow;
+  display: flex;
+}
+.short-ver {
+  width: 40px;
+  height: 120px;
+  background-color: yellow;
+  display: inline-block;
+}
+.short2 {
+  width: 120px;
+  height: 40px;
+  background-color: fuchsia;
+  display: flex;
+}
+.short2-ver {
+  width: 40px;
+  height: 120px;
+  background-color: fuchsia;
+  display: inline-block;
+}
+.long {
+  width: 160px;
+  height: 40px;
+  background-color: black;
+  display: flex;
+}
+.long-ver {
+  width: 40px;
+  height: 160px;
+  background-color: black;
+  display: inline-block;
+}
+
+.longest {
+  width: 200px;
+  height: 40px;
+  background-color: teal;
+  display: flex;
+}
+
+.longest-ver {
+  width: 40px;
+  height: 200px;
+  background-color: teal;
+  display: inline-block;
+}
