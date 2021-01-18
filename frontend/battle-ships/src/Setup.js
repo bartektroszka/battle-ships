@@ -87,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const shipsCollide = (shipOne, shipTwo) => {
-    console.log(shipOne, shipTwo);
     return (
       shipOne.takenIds.filter((value) => shipTwo.takenIds.includes(value)) != 0
     );
