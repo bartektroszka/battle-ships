@@ -31,7 +31,7 @@
   margin: 10px;
 }
 .your-ships {
-  background-color: grey;
+  background-color: steelblue;
   width: 400px;
   height: 400px;
   display: flex;
@@ -57,13 +57,13 @@
   width: 80px;
   height: 40px;
   display: flex;
-  background-color: hotpink;
+  background-color: rgb(65, 145, 28);
 }
 
 .shortest-ver {
   width: 40px;
   height: 80px;
-  background-color: hotpink;
+  background-color: rgb(65, 145, 28);
   flex-wrap: wrap;
   display: inline-block;
 }
@@ -113,13 +113,13 @@
 .short2 {
   width: 120px;
   height: 40px;
-  background-color: fuchsia;
+  background-color: rosybrown;
   display: flex;
 }
 .short2-ver {
   width: 40px;
   height: 120px;
-  background-color: fuchsia;
+  background-color: rosybrown;
   display: inline-block;
 }
 .long {
@@ -138,13 +138,13 @@
 .longest {
   width: 200px;
   height: 40px;
-  background-color: teal;
+  background-color: rgb(85, 5, 18);
   display: flex;
 }
 
 .longest-ver {
   width: 40px;
   height: 200px;
-  background-color: teal;
+  background-color: rgb(85, 5, 18);
   display: inline-block;
 }

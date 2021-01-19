@@ -145,6 +145,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   const dragStart = (e) => {
     draggedShip = e.target;
+    if (draggedShip.className.slice(0, 4) != "ship") {
+      return;
+    }
     shipName = draggedShip.className.slice(5);
     draggedShipInList = shipsList.filter(
       (ship) => ship.name == shipName || ship.name + "-ver" == shipName
@@ -169,6 +172,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const dragDrop = (e) => {
+    if (draggedShip.className.slice(0, 4) != "ship") {
+      return;
+    }
     dragShip(...computeEdges(e));
     userGrid.childNodes.forEach((node) => {
       if (node.className == "" || node.className == "available") {
@@ -178,10 +184,16 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const dragOver = (e) => {
+    if (draggedShip.className.slice(0, 4) != "ship") {
+      return;
+    }
     e.preventDefault();
   };
 
   const dragEnter = (e) => {
+    if (draggedShip.className.slice(0, 4) != "ship") {
+      return;
+    }
     [shipBeginId, shipLastId] = computeEdges(e);
     step = vertical ? 10 : 1;
     draggedShipInList.takenIds = range(shipBeginId, shipLastId, step);
