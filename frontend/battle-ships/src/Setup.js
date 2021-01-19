@@ -86,10 +86,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const distanceLessThanOne = (id1, id2) => {
+    let x1 = Math.floor(id1 / 10);
+    let y1 = id1 % 10;
+    let x2 = Math.floor(id2 / 10);
+    let y2 = id2 % 10;
+
+    if (Math.abs(x2 - x1) <= 1 && Math.abs(y2 - y1) <= 1) return true;
+    return false;
+  };
+
   const shipsCollide = (shipOne, shipTwo) => {
-    return (
-      shipOne.takenIds.filter((value) => shipTwo.takenIds.includes(value)) != 0
-    );
+    let result = false;
+    shipOne.takenIds.forEach((value1) => {
+      shipTwo.takenIds.forEach((value2) => {
+        if (distanceLessThanOne(value1, value2)) {
+          result = true;
+        }
+      });
+    });
+    return result;
   };
 
   const dragAllowed = (shipBeginId, shipLastId) => {
