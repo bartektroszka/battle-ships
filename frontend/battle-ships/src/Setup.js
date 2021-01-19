@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
     for (let i = 0; i < shipLength; i++) {
       let step = vertical ? 10 : 1;
       let index = shipBeginId + step * i;
-      let node = userGrid.childNodes[index];
+      let node = userGrid.childNodes[index + 1];
       if (node && node.className == "") {
         if (dragAllowed(shipBeginId, shipLastId)) {
           node.setAttribute("class", "available");
