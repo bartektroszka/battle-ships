@@ -6,8 +6,7 @@ import * as socketIO from 'socket.io'
 import config from '../config.json'
 
 import {} from './rooms.js'
-import { createTokenForPlayer } from './player.js'
-
+import { login } from './middlewares.js'
 
 const app = express()
 const server = http.Server(app)
@@ -19,15 +18,10 @@ app.set('views', './views')
 app.use(bodyParser.urlencoded({extended: true}))
 
 app.get('/', (req, res) => {
-    res.render('login')
+    res.render('login', {'invalidUsername': false})
 })
 
-app.post('/login', (req, res) => {
-    let userName = req.body.userName
-    let token = createTokenForPlayer(userName)
-    res.cookie('player-token', token)
-    res.render('rooms', {userName})
-})
+app.post('/login', login)
 
 io.on('connection', (socket) => {
     console.log("new socket connection")

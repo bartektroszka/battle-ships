@@ -9,6 +9,11 @@ class Player {
     }
 }
 
+export function isUsernameValid(name) {
+    // TODO: handle unicode like "żółw"
+    return name.match(/^[A-Za-z0-9]+$/)
+}
+
 export function createTokenForPlayer(name) {
     let token = null
     do {
