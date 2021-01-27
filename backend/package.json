@@ -2,8 +2,10 @@
   "name": "battle-ships-server",
   "version": "1.0.0",
   "description": "Server for a simple battleships game.",
-  "main": "server.js",
+  "main": "src/server.js",
+  "type": "module",
   "scripts": {
+    "start": "node src/server.js --experimental-modules",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

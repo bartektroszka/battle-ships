@@ -1,7 +1,11 @@
-const app = require('express')();
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
-const bodyParser = require('body-parser')
+import express from 'express'
+import http from 'http'
+import bodyParser from 'body-parser'
+import * as socketIO from 'socket.io'
+
+const app = express()
+const server = http.Server(app)
+const io = new socketIO.Server(http);
 
 const portNumber = 3000
 
@@ -24,7 +28,7 @@ io.on('connection', (socket) => {
     console.log("new socket connection")
 })
 
-http.listen(portNumber, () => {
+server.listen(portNumber, () => {
     console.log('listening on port ' + portNumber)
 })
 
