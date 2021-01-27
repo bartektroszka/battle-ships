@@ -3,11 +3,15 @@ import http from 'http'
 import bodyParser from 'body-parser'
 import * as socketIO from 'socket.io'
 
+import config from '../config.json'
+
+import {} from './rooms.js'
+import { createTokenForPlayer } from './player.js'
+
+
 const app = express()
 const server = http.Server(app)
 const io = new socketIO.Server(http);
-
-const portNumber = 3000
 
 app.set('view engine', 'ejs')
 app.set('views', './views')
@@ -20,7 +24,8 @@ app.get('/', (req, res) => {
 
 app.post('/login', (req, res) => {
     let userName = req.body.userName
-    console.log(userName + " connected")
+    let token = createTokenForPlayer(userName)
+    res.cookie('player-token', token)
     res.render('rooms', {userName})
 })
 
@@ -28,7 +33,11 @@ io.on('connection', (socket) => {
     console.log("new socket connection")
 })
 
-server.listen(portNumber, () => {
-    console.log('listening on port ' + portNumber)
+server.listen(config.port, () => {
+    console.log('listening on port ' + config.port)
 })
+
+
+
+
 
