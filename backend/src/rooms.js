@@ -1,12 +1,13 @@
 class Room {
-    constructor(password) {
+    constructor(id, name) {
+        this.id = id
         this.players = []
-        this.password = password
+        this.name = name
     }
 
-    insertPlayer(player, password) {
-        if (this.password && this.password != password) {
-            throw new Error('Invalid password')
+    insertPlayer(player) {
+        if (this.players.includes(player)) {
+            return;
         }
 
         if (this.players.length == 2) {
@@ -15,6 +16,26 @@ class Room {
 
         this.players.push(player)
     }
+
+    members() {
+        return this.players.map((player) => player.name).join(", ")
+    }
 }
 
-let rooms = []
+let rooms = {}
+let nextRoomId = 0
+
+export function createRoom(name) {
+    let id = nextRoomId++
+    let room = new Room(id, name)
+    rooms[id] = room
+    return room
+}
+
+export function getRooms() {
+    return Object.values(rooms)
+}
+
+export function getRoomById(id) {
+    return rooms[id]
+}

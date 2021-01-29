@@ -18,10 +18,18 @@ export function createTokenForPlayer(name) {
     let token = null
     do {
         let randomNumber = Math.random() * 1000000
-        token = crypto.MD5(name + randomNumber)
+        token = crypto.MD5(name + randomNumber).toString()
     } while (token in playersByToken)
 
     playersByToken[token] = new Player(name, token)
 
     return token
+}
+
+export function getPlayerByToken(token) {
+    if (token in playersByToken) {
+        return playersByToken[token]
+    } else {
+        throw new Error('Player token is not valid (' + token + ')')
+    }
 }
