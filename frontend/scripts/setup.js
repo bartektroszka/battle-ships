@@ -1,54 +1,32 @@
+function collectShips() {
+    let classes = ["shortest", "short", "short2", "long", "longest"]
+    let ships = []
+    for (let shipClass of classes) {
+        let shipDiv = document.querySelector('.' + shipClass)
+        console.log(shipDiv)
+        let length = parseInt(shipDiv.getAttribute('length'))
+        ships.push({
+            name: shipClass,
+            ship: shipDiv,
+            length: length,
+            takenIds: [],
+            deployed: false,
+        })
+    }
+    return ships
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     const userGrid = document.querySelector(".your-ships");
     const displayGrid = document.querySelector(".deploy-ships");
     const ships = document.querySelectorAll(".ship");
-    const shortest = document.querySelector(".shortest");
-    const short = document.querySelector(".short");
-    const short2 = document.querySelector(".short2");
-    const long = document.querySelector(".long");
-    const longest = document.querySelector(".longest");
     const rotateButton = document.querySelector("#rotate");
     const width = 10;
     const fieldWidth = 40;
     let vertical = false;
     const userFields = [];
-    let shipsList = [
-        {
-            name: "shortest",
-            ship: shortest,
-            length: 2,
-            takenIds: [],
-            deployed: false,
-        },
-        {
-            name: "short",
-            ship: short,
-            length: 3,
-            takenIds: [],
-            deployed: false,
-        },
-        {
-            name: "short2",
-            ship: short2,
-            length: 3,
-            takenIds: [],
-            deployed: false,
-        },
-        {
-            name: "long",
-            ship: long,
-            length: 4,
-            takenIds: [],
-            deployed: false,
-        },
-        {
-            name: "longest",
-            ship: longest,
-            length: 5,
-            takenIds: [],
-            deployed: false,
-        },
-    ];
+
+    let shipsList = collectShips()
 
     const range = (start, end, step) => {
         if (start >= end) return [start];

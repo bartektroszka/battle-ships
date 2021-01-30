@@ -21,6 +21,7 @@
   height: 400px;
   margin: 10px;
 }
+
 .your-ships {
   background-color: grey;
   width: 400px;
@@ -65,30 +66,35 @@
   background-color: yellow;
   display: flex;
 }
+
 .short-ver {
   width: 40px;
   height: 120px;
   background-color: yellow;
   display: inline-block;
 }
+
 .short2 {
   width: 120px;
   height: 40px;
   background-color: fuchsia;
   display: flex;
 }
+
 .short2-ver {
   width: 40px;
   height: 120px;
   background-color: fuchsia;
   display: inline-block;
 }
+
 .long {
   width: 160px;
   height: 40px;
   background-color: black;
   display: flex;
 }
+
 .long-ver {
   width: 40px;
   height: 160px;
