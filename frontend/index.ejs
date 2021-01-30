@@ -10,6 +10,12 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
+        socket.emit('roomId', <%= roomId %>)
+
+        socket.on('gameState', (gameState) => {
+            // TODO: handle game
+            console.log(gameState)
+        })
     </script>
     <div class="container">
       <div class="deploy-ships">

@@ -1,8 +1,12 @@
+import { GameState } from './game.js'
+
+
 class Room {
     constructor(id, name) {
         this.id = id
         this.players = []
         this.name = name
+        this.gameStates = {}
     }
 
     insertPlayer(player) {
@@ -15,6 +19,11 @@ class Room {
         }
 
         this.players.push(player)
+        this.gameStates[player] = new GameState()
+    }
+
+    getGameState(player) {
+        return this.gameStates[player]
     }
 
     removePlayer(player) {

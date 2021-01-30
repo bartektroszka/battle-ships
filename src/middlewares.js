@@ -2,7 +2,7 @@ import { isUsernameValid, createTokenForPlayer, getPlayerByToken } from './playe
 import { getRooms, createRoom, getRoomById } from './rooms.js'
 
 
-const playerTokenCookieName = 'player-token'
+export const playerTokenCookieName = 'player-token'
 
 export function root(req, res) {
     res.render('login', {'invalidUsername': false})
@@ -44,7 +44,7 @@ export function joinRoom(req, res) {
 export function room(req, res) {
     let roomId = req.query.id
     let room = getRoomById(roomId)
-    res.render('../frontend/index')
+    res.render('../frontend/index', {roomId})
 }
 
 export function rooms(req, res) {
