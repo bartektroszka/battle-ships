@@ -17,6 +17,14 @@ class Room {
         this.players.push(player)
     }
 
+    removePlayer(player) {
+        if (!this.players.includes(player)) {
+            throw new Error('Player "' + player.name + '" is not in the room #' + this.id)
+        }
+
+        this.players = this.players.filter((p) => p != player)
+    }
+
     members() {
         return this.players.map((player) => player.name).join(", ")
     }

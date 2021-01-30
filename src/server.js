@@ -11,12 +11,13 @@ import { root, login, makeRoom, room, rooms, joinRoom } from './middlewares.js'
 
 const app = express()
 const server = http.Server(app)
-const io = new socketIO.Server(http);
+const io = new socketIO.Server(server);
 
 app.set('view engine', 'ejs')
 app.set('views', './views')
 app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser())
+app.use(express.static('frontend'))
 
 app.get('/', root)
 app.post('/login', login)
