@@ -3,7 +3,6 @@ function collectShips() {
     let ships = []
     for (let shipClass of classes) {
         let shipDiv = document.querySelector('.' + shipClass)
-        console.log(shipDiv)
         let length = parseInt(shipDiv.getAttribute('length'))
         ships.push({
             name: shipClass,
@@ -35,13 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const rotateShips = () => {
         function rotateSingleShip(ship) {
-            if (vertical) {
-                ship.ship.classList.toggle(ship.name + '-ver')
-                ship.ship.classList.toggle(ship.name)
-            } else {
-                ship.ship.classList.toggle(ship.name + '-ver')
-                ship.ship.classList.remove(ship.name)
-            }
+            ship.ship.classList.toggle(ship.name + '-ver')
+            ship.ship.classList.toggle(ship.name)
             vertical = !vertical;
         }
 
