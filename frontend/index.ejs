@@ -12,9 +12,9 @@
         var socket = io();
         socket.emit('roomId', <%= roomId %>)
 
-        socket.on('gameState', (gameState) => {
+        socket.on('boardState', (board) => {
             // TODO: handle game
-            console.log(gameState)
+            console.log(board)
         })
     </script>
     <div class="container">

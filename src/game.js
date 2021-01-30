@@ -1,15 +1,15 @@
-export class GameState {
+export class Board {
     constructor() {
-        this.xd = "Xd"
+        this.ready = false
+        this.board = null
     }
 }
 
 export function handleGame(socket, player, room) {
     console.log(`Handling ${player.name} joining room ${room.id}`)
-
     sendGameState(socket, player, room)
 }
 
 function sendGameState(socket, player, room) {
-    socket.emit('gameState', room.getGameState(player))
+    socket.emit('boardState', room.getBoardState(player))
 }

@@ -1,4 +1,4 @@
-import { GameState } from './game.js'
+import { Board } from './game.js'
 
 
 class Room {
@@ -6,7 +6,7 @@ class Room {
         this.id = id
         this.players = []
         this.name = name
-        this.gameStates = {}
+        this.boards = {}
     }
 
     insertPlayer(player) {
@@ -19,11 +19,11 @@ class Room {
         }
 
         this.players.push(player)
-        this.gameStates[player] = new GameState()
+        this.boards[player] = new Board()
     }
 
-    getGameState(player) {
-        return this.gameStates[player]
+    getBoardState(player) {
+        return this.boards[player]
     }
 
     removePlayer(player) {
