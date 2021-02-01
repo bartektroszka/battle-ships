@@ -202,11 +202,12 @@ document.addEventListener("DOMContentLoaded", () => {
       for (let row = 0; row < width; row++) {
         ourboard.push([]);
         for (let col = 0; col < width; col++) {
-          let target = userGrid.childNodes
-            .item(`${row * 10 + col}`)
-            .className.split(" ")
-            .pop();
-          ourboard[row].push([target, false]);
+          let target = userGrid.childNodes.item(`${row * 10 + col}`);
+          if (target) {
+            ourboard[row].push([target.className.split(" ").pop(), false]);
+          } else {
+            ourboard[row].push(null);
+          }
         }
       }
 
@@ -221,6 +222,9 @@ document.addEventListener("DOMContentLoaded", () => {
     startGame();
     while (true) {
       //tu wysylam i odbieram te requesty az nie wyslesz ze koniec gry
+
+      getMove(row, col); //odpowiednie wspolrzedne jesli przesylasz mi strzal
+      shootEnemy(); // to sie samo wysyla jak ktos kliknie na jakies pole (jak uzupelnisz shoot enemy o tego requesta)
     }
     console.log("End of the game");
   };
