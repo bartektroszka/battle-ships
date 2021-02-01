@@ -10,8 +10,27 @@
   display: flex;
 }
 
+.shot {
+  width: 40px;
+  height: 40px;
+  background-color: red;
+  display: flex;
+}
+
+.miss {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(207, 140, 140);
+  display: flex;
+}
+
 .container {
   display: flex;
+  margin: 10px;
+}
+
+.container-2 {
+  display: none;
   margin: 10px;
 }
 
@@ -23,7 +42,25 @@
 }
 
 .your-ships {
-  background-color: grey;
+  background-color: rgb(107, 189, 175);
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid-user {
+  background-color: rgb(107, 189, 175);
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid-computer {
+  background-color: rgb(107, 189, 175);
   width: 400px;
   height: 400px;
   margin: 10px;
