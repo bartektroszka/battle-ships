@@ -1,12 +1,5 @@
-export class Board {
-    constructor() {
-        this.ready = false
-        this.board = null
-    }
-}
-
 export function handleGame(socket, player, room) {
-    console.log(`Handling ${player.name} joining room ${room.id}`)
+    console.log(`Handling ${player.prettyPrint()} joining room ${room.id}`)
     expectSetup(socket, player, room)
 
 }
@@ -15,18 +8,19 @@ function expectSetup(socket, player, room) {
     socket.emit('expectingSetup')
 
     socket.on('setupDone', (setup) => {
-        // TODO: update setup
-        console.log(
-            `Received setup from player "${player.name}" (${player.token}) for room #${room.id}`
-        )
+        console.log(`Received setup from player ${player.prettyPrint()} for room ${room}`)
 
+        room.setBoard(player, setup)
         room.makePlayerReady(player)
 
         if (room.areAllPlayersReady()) {
+            console.log(`Both players in room ${room} are ready. Starting the game.`)
             let otherSocket = room.getSocketForPlayer(room.getOtherPlayer(player))
-            otherSocket.emit('otherPlayerReady')
+            otherSocket.emit('bothPlayersReady')
+            socket.emit('bothPlayersReady')
             // TODO: start game
         } else {
+            console.log(`Waiting for another player to join room ${room}`)
             socket.emit('waitForOtherPlayer')
         }
     })

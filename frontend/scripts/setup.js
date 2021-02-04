@@ -21,9 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const ships = document.querySelectorAll(".ship");
   const userGameGrid = document.querySelector(".grid-user");
   const computerGameGrid = document.querySelector(".grid-computer");
-
   const rotateButton = document.querySelector("#rotate");
   const startButton = document.querySelector("#start");
+  const whoseGo = document.querySelector("#whose-go")
   const width = 10;
   const fieldWidth = 40;
   let vertical = false;
@@ -227,8 +227,6 @@ document.addEventListener("DOMContentLoaded", () => {
         field.addEventListener("click", shootEnemy)
       );
     };
-
-    socket.on('expectSetup', expectSetup)
   };
 
   let expectingSetup = false;
@@ -251,6 +249,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   socket.on('expectingSetup', () => {
     expectingSetup = true;
+  });
+
+  socket.on('waitForOtherPlayer', () => {
+    whoseGo.innerHTML = "Waiting for the other player"
+  });
+
+  socket.on('bothPlayersReady', () => {
+    whoseGo.innerHTML = "Game is starting"
+    window.alert("Your opponent is ready")
   });
 
   userFields.forEach((field) => field.addEventListener("dragstart", dragStart));

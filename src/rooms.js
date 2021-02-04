@@ -1,6 +1,3 @@
-import { Board } from './game.js'
-
-
 class Room {
     constructor(id, name) {
         this.id = id
@@ -22,7 +19,7 @@ class Room {
 
         this.players.push(player)
         this.isReady[player] = false
-        this.boards[player] = new Board()
+        this.boards[player] = null
     }
 
     assignSocketForPlayer(player, socket) {
@@ -37,8 +34,8 @@ class Room {
         return this.sockets[player]
     }
 
-    getBoardState(player) {
-        return this.boards[player]
+    setBoard(player, board) {
+        this.boards[player] = board
     }
 
     hasPlayer(player) {
@@ -50,11 +47,15 @@ class Room {
     }
 
     areAllPlayersReady() {
-        return this.isReady.every(Boolean)
+        return this.players.length == 2 && Object.values(this.isReady).every(Boolean)
     }
 
     members() {
         return this.players.map((player) => player.name).join(", ")
+    }
+
+    toString() {
+        return `#${this.id}`
     }
 }
 

@@ -24,7 +24,7 @@ export function login(req, res) {
 export function makeRoom(req, res) {
     let roomName = req.body.roomName
     let room = createRoom(roomName)
-    console.log('Room #' + room.id + ' "' + roomName + '" was created')
+    console.log(`Room ${room} ("${roomName}") was created`)
 
     res.redirect('/join-room?id=' + room.id)
 }
@@ -35,9 +35,9 @@ export function joinRoom(req, res) {
     let roomId = req.query.id
     let room = getRoomById(roomId)
 
-    console.log(`Player "${player.name}" (${player.token}) attempts to join room #${room.id}`)
+    console.log(`Player ${player.prettyPrint()} attempts to join room ${room}`)
     room.insertPlayer(player)
-    console.log(`Player "${player.name}" (${player.token}) joined room #${room.id}`)
+    console.log(`Player ${player.prettyPrint()} joined room ${room}`)
 
     res.redirect('/room?id=' + room.id)
 }

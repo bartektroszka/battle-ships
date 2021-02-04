@@ -16,9 +16,10 @@ export function socketHandler(socket) {
 
     socket.on('roomId', (id) => {
         roomId = id
-        console.log(`User "${player.name}" (${player.token}) connected via socket to room #${roomId}`)
+        console.log(`${player.prettyPrint()} connected via socket to room #${roomId}`)
         let room = getRoomById(roomId)
         if (room.hasPlayer(player)) {
+            room.assignSocketForPlayer(player, socket)
             handleGame(socket, player, room)
         } else {
             console.log("Rejected the connection. User was not in the target room")
@@ -27,7 +28,7 @@ export function socketHandler(socket) {
 
     socket.on('disconnect', () => {
         // TODO: remove player from room and award win to him
-        console.log(`User "${player.name}" (${player.token}) disconnected via socket from room ${roomId}.'`)
+        console.log(`${player.prettyPrint()} surrendered the match in room ${roomId}.'`)
     })
 }
 

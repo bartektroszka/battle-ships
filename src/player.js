@@ -7,6 +7,14 @@ class Player {
         this.name = name
         this.token = token
     }
+
+    prettyPrint() {
+        return `("${this.name}" : ${this.token})`
+    }
+
+    toString() {
+        return this.token
+    }
 }
 
 export function isUsernameValid(name) {

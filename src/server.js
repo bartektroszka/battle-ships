@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser())
 app.use(express.static('frontend'))
 
+// TODO:  at root check if the player already has the token
 app.get('/', root)
 app.post('/login', login)
 app.post('/make-room', makeRoom)
