@@ -33,11 +33,12 @@ export function joinRoom(req, res) {
     let playerToken = req.cookies[playerTokenCookieName]
     let player = getPlayerByToken(playerToken)
     let roomId = req.query.id
-
     let room = getRoomById(roomId)
-    room.insertPlayer(player)
 
-    console.log('Player "' + player.name + '" (' + player.token + ') joined room #' + roomId)
+    console.log(`Player "${player.name}" (${player.token}) attempts to join room #${room.id}`)
+    room.insertPlayer(player)
+    console.log(`Player "${player.name}" (${player.token}) joined room #${room.id}`)
+
     res.redirect('/room?id=' + room.id)
 }
 

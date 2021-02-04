@@ -6,11 +6,13 @@ class Room {
         this.id = id
         this.players = []
         this.name = name
+        this.sockets = {}
+        this.isReady = {}
         this.boards = {}
     }
 
     insertPlayer(player) {
-        if (this.players.includes(player)) {
+        if (this.hasPlayer(player)) {
             return;
         }
 
@@ -19,19 +21,36 @@ class Room {
         }
 
         this.players.push(player)
+        this.isReady[player] = false
         this.boards[player] = new Board()
+    }
+
+    assignSocketForPlayer(player, socket) {
+        this.sockets[player] = socket
+    }
+
+    getOtherPlayer(player) {
+        return this.players.find(p => p != player)
+    }
+
+    getSocketForPlayer(player) {
+        return this.sockets[player]
     }
 
     getBoardState(player) {
         return this.boards[player]
     }
 
-    removePlayer(player) {
-        if (!this.players.includes(player)) {
-            throw new Error('Player "' + player.name + '" is not in the room #' + this.id)
-        }
+    hasPlayer(player) {
+        return this.players.includes(player)
+    }
 
-        this.players = this.players.filter((p) => p != player)
+    makePlayerReady(player) {
+        this.isReady[player] = true
+    }
+
+    areAllPlayersReady() {
+        return this.isReady.every(Boolean)
     }
 
     members() {

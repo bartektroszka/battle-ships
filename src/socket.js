@@ -18,13 +18,17 @@ export function socketHandler(socket) {
         roomId = id
         console.log(`User "${player.name}" (${player.token}) connected via socket to room #${roomId}`)
         let room = getRoomById(roomId)
-        handleGame(socket, player, room)
+        if (room.hasPlayer(player)) {
+            handleGame(socket, player, room)
+        } else {
+            console.log("Rejected the connection. User was not in the target room")
+        }
     })
 
     socket.on('disconnect', () => {
+        // TODO: remove player from room and award win to him
         console.log(`User "${player.name}" (${player.token}) disconnected via socket from room ${roomId}.'`)
     })
-
 }
 
 function getPlayerFromSocket(socket) {

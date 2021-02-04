@@ -11,11 +11,6 @@
     <script>
       var socket = io();
       socket.emit('roomId', <%= roomId %>)
-
-      socket.on('boardState', (board) => {
-          // TODO: handle game
-          console.log(board)
-      })
     </script>
     <div class="container">
       <div class="grid your-ships"></div>

@@ -98,7 +98,9 @@ document.addEventListener("DOMContentLoaded", () => {
         );
       }
       displayGrid.removeChild(draggedShip);
-      if (!displayGrid.querySelector(".ship")) allShipsPlaced = true;
+      if (!displayGrid.querySelector(".ship")) {
+        startButton.disabled = false;
+      }
     }
   };
 
@@ -169,6 +171,22 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
   };
 
+  const collectSetup = () => {
+    let board = [];
+    for (let row = 0; row < width; row++) {
+      board.push([]);
+      for (let col = 0; col < width; col++) {
+        let target = userGrid.childNodes.item(`${row * 10 + col}`);
+        if (target) {
+          board[row].push([target.className.split(" ").pop(), false]);
+        } else {
+          board[row].push(null);
+        }
+      }
+    }
+    return board;
+  }
+
   const game = () => {
     const shootEnemy = (e) => {
       let id = e.target.id;
@@ -197,19 +215,9 @@ document.addEventListener("DOMContentLoaded", () => {
         target.setAttribute("class", "miss");
       }
     };
+
     const startGame = () => {
-      let ourboard = [];
-      for (let row = 0; row < width; row++) {
-        ourboard.push([]);
-        for (let col = 0; col < width; col++) {
-          let target = userGrid.childNodes.item(`${row * 10 + col}`);
-          if (target) {
-            ourboard[row].push([target.className.split(" ").pop(), false]);
-          } else {
-            ourboard[row].push(null);
-          }
-        }
-      }
+      let ourBoard = collectSetup();
 
       //tu wysylam ci ourboard
       let gameBoard = document.getElementById("gamecontainer");
@@ -219,17 +227,11 @@ document.addEventListener("DOMContentLoaded", () => {
         field.addEventListener("click", shootEnemy)
       );
     };
-    startGame();
-    while (true) {
-      //tu wysylam i odbieram te requesty az nie wyslesz ze koniec gry
 
-      getMove(row, col); //odpowiednie wspolrzedne jesli przesylasz mi strzal
-      shootEnemy(); // to sie samo wysyla jak ktos kliknie na jakies pole (jak uzupelnisz shoot enemy o tego requesta)
-    }
-    console.log("End of the game");
+    socket.on('expectSetup', expectSetup)
   };
 
-  let allShipsPlaced = false;
+  let expectingSetup = false;
   let draggedShip;
   let draggedShipInList;
   let shipLength;
@@ -239,6 +241,17 @@ document.addEventListener("DOMContentLoaded", () => {
   let shipName;
 
   createBoard(userGrid, userFields);
+
+  const sendSetup = () => {
+    if (expectingSetup) {
+      socket.emit('setupDone', collectSetup())
+      startButton.style.display = "none"
+    }
+  };
+
+  socket.on('expectingSetup', () => {
+    expectingSetup = true;
+  });
 
   userFields.forEach((field) => field.addEventListener("dragstart", dragStart));
   userFields.forEach((field) => field.addEventListener("dragover", dragOver));
@@ -252,5 +265,9 @@ document.addEventListener("DOMContentLoaded", () => {
       selectedShipId = e.target.id;
     });
   });
-  startButton.addEventListener("click", game);
+  startButton.addEventListener("click", sendSetup);
+  startButton.disabled = true;
+
 });
+
+
