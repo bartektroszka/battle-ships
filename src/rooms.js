@@ -26,12 +26,42 @@ class Room {
         this.sockets[player] = socket
     }
 
+    getPlayersWithSockets() {
+        return this.players.map(player => [player, this.sockets[player]])
+    }
+
+    shootPlayer(player, {row, col}) {
+        let board = this.getBoard(player)
+        let tile = board[row][col]
+
+        if (tile == null) {
+            return null
+        }
+
+        tile.hit = true
+        let ship = tile.shipName
+        let destroyed = board.every(row =>
+            row.every(tile => !tile || tile.shipName != ship || tile.hit)
+        )
+
+        return { row, col, destroyed }
+    }
+
     getOtherPlayer(player) {
         return this.players.find(p => p != player)
     }
 
     getSocketForPlayer(player) {
         return this.sockets[player]
+    }
+
+    hasPlayerWon(player) {
+        let opponentsBoard = this.getBoard(this.getOtherPlayer(player))
+        return opponentsBoard.every(row => row.every(tile => !tile || tile.hit))
+    }
+
+    getBoard(player) {
+        return this.boards[player]
     }
 
     setBoard(player, board) {

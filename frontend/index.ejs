@@ -12,6 +12,9 @@
       var socket = io();
       socket.emit('roomId', <%= roomId %>)
     </script>
+    <div class="container-2" id="gamecontainer">
+      <div class="grid grid-computer"></div>
+    </div>
     <div class="container">
       <div class="grid your-ships"></div>
       <div class="deploy-ships">
@@ -50,10 +53,6 @@
       <button id="rotate">Rotate Your Ships</button>
       <h3 id="whose-go">Place all of your ships on the board.</h3>
       <h3 id="info"></h3>
-    </div>
-
-    <div class="container-2" id="gamecontainer">
-      <div class="grid grid-computer"></div>
     </div>
   </body>
 </html>
