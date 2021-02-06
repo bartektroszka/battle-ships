@@ -19,6 +19,10 @@
         <input type="submit" name="submit" value="Create room"/>
     </form>
 
+    <form method='get' action='/rooms'>
+        <input type="submit" name="submit" value="Refresh">
+    </form>
+
     <div>
         Existing rooms (refresh to see more):
         <% for (let room of rooms) {%>
