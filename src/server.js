@@ -7,7 +7,7 @@ import * as socketIO from 'socket.io'
 import config from '../config.json'
 
 import {} from './rooms.js'
-import { root, login, makeRoom, room, rooms, joinRoom } from './middlewares.js'
+import { root, login, makeRoom, room, rooms, joinRoom, logAgain } from './middlewares.js'
 import { socketHandler } from './socket.js'
 
 const app = express()
@@ -20,8 +20,8 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser())
 app.use(express.static('frontend'))
 
-// TODO:  at root check if the player already has the token
 app.get('/', root)
+app.post('/relog', logAgain)
 app.post('/login', login)
 app.post('/make-room', makeRoom)
 app.get('/room', room)

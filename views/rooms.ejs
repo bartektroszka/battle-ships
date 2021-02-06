@@ -4,10 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Room list</title>
 </head>
 
 <body>
+    <form method='post' action='/relog'>
+        Choose a new username:
+        <input type="submit" name="submit" value="Go to login">
+    </form>
+
     <form method='post' action='/make-room'>
         Create a new room:
         <input type="text" name="roomName" placeholder="Room name (optional)"/>
@@ -15,18 +20,21 @@
     </form>
 
     <div>
-        Existing rooms:
+        Existing rooms (refresh to see more):
         <% for (let room of rooms) {%>
             <div class="room">
                 <div class="room-name"><%= room.name %></div>
                 <div class="room-members"><%= room.members() %></div>
                 <form method='post' action=<%= '/join-room?id=' + room.id %>>
-                    <input type="submit" name="submit" value="Join room"/>
+                    <input id="" type="submit" name="submit" value="Join room"
+                    <% if (room.isFull()) { %>
+                        disabled
+                    <% } %>
+                    />
                 </form>
             </div>
         <% } %>
     </div>
-
 </body>
 
 </html>

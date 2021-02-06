@@ -5,7 +5,13 @@ import { getRooms, createRoom, getRoomById } from './rooms.js'
 export const playerTokenCookieName = 'player-token'
 
 export function root(req, res) {
-    res.render('login', {'invalidUsername': false})
+    let playerToken = req.cookies[playerTokenCookieName]
+    if (playerToken) {
+        res.redirect('/rooms')
+    } else {
+        res.render('login', {'invalidUsername': false})
+    }
+
 }
 
 export function login(req, res) {
@@ -19,6 +25,10 @@ export function login(req, res) {
     } else {
         res.render('login', {'invalidUsername': true})
     }
+}
+
+export function logAgain(req, res) {
+    res.render('login', {'invalidUsername': false})
 }
 
 export function makeRoom(req, res) {
@@ -36,15 +46,18 @@ export function joinRoom(req, res) {
     let room = getRoomById(roomId)
 
     console.log(`Player ${player.prettyPrint()} attempts to join room ${room}`)
-    room.insertPlayer(player)
-    console.log(`Player ${player.prettyPrint()} joined room ${room}`)
-
-    res.redirect('/room?id=' + room.id)
+    try {
+        room.insertPlayer(player)
+        console.log(`Player ${player.prettyPrint()} joined room ${room}`)
+        res.redirect('/room?id=' + room.id)
+    } catch (err) {
+        console.log(`${player.prettyPrint()} failed to join with error "${err.message}"`)
+        res.redirect('/rooms')
+    }
 }
 
 export function room(req, res) {
     let roomId = req.query.id
-    let room = getRoomById(roomId)
     res.render('../frontend/index', {roomId})
 }
 

@@ -13,7 +13,7 @@ class Room {
             return;
         }
 
-        if (this.players.length == 2) {
+        if (this.isFull()) {
             throw new Error('Room is full')
         }
 
@@ -82,6 +82,15 @@ class Room {
 
     members() {
         return this.players.map((player) => player.name).join(", ")
+    }
+
+    isFull() {
+        return this.players.length == 2
+    }
+
+    endGame() {
+        console.log(`Deleting room ${this}`)
+        delete rooms[this.id]
     }
 
     toString() {

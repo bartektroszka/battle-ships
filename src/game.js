@@ -47,6 +47,7 @@ function playGame(room) {
                     console.log(`Player ${player} has won the game in room ${room}`)
                     socket.emit('gameWon')
                     otherSocket.emit('gameLost')
+                    room.endGame()
                 } else {
                     socket.emit('makeMove')
                 }
