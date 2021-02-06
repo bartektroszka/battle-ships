@@ -94,6 +94,7 @@
   height: 40px;
   display: flex;
   background-color: hotpink;
+  border: 0px !important;
 }
 .deploy-ships .shortest {
   border-radius: 25px;
@@ -105,6 +106,7 @@
   background-color: hotpink;
   flex-wrap: wrap;
   display: inline-block;
+  border: 0px !important;
 }
 .deploy-ships .shortest-ver {
   border-radius: 25px;
@@ -115,6 +117,7 @@
   height: 40px;
   background-color: yellow;
   display: flex;
+  border: 0px !important;
 }
 .deploy-ships .short {
   border-radius: 25px;
@@ -125,6 +128,7 @@
   height: 120px;
   background-color: yellow;
   display: inline-block;
+  border: 0px !important;
 }
 .deploy-ships .short-ver {
   border-radius: 25px;
@@ -135,6 +139,7 @@
   height: 40px;
   background-color: fuchsia;
   display: flex;
+  border: 0px !important;
 }
 .deploy-ships .short2 {
   border-radius: 25px;
@@ -144,6 +149,7 @@
   height: 120px;
   background-color: fuchsia;
   display: inline-block;
+  border: 0px !important;
 }
 .deploy-ships .short2-ver {
   border-radius: 25px;
@@ -174,6 +180,7 @@
   height: 40px;
   background-color: black;
   display: flex;
+  border: 0px !important;
 }
 
 .deploy-ships .long {
@@ -185,6 +192,7 @@
   height: 160px;
   background-color: black;
   display: inline-block;
+  border: 0px !important;
 }
 .deploy-ships .long-ver {
   border-radius: 25px;
@@ -194,6 +202,7 @@
   height: 40px;
   background-color: rgb(6, 80, 80);
   display: flex;
+  border: 0px !important;
 }
 .deploy-ships .longest {
   border-radius: 25px;
@@ -204,16 +213,17 @@
   height: 200px;
   background-color: rgb(6, 80, 80);
   display: inline-block;
+  border: 0px !important;
 }
 .deploy-ships .longest-ver {
   border-radius: 25px;
 }
 .right-end {
-  border-radius: 0px 25px 25px 0px !important;
+  border-radius: 0px 25px 25px 0px;
 }
 
 .left-end {
-  border-radius: 25px 0px 0px 25px !important;
+  border-radius: 25px 0px 0px 25px;
 }
 .top-end {
   border-radius: 25px 25px 0px 0px;
