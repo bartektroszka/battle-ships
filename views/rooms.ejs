@@ -26,12 +26,15 @@
                 <div class="room-name"><%= room.name %></div>
                 <div class="room-members"><%= room.members() %></div>
                 <form method='post' action=<%= '/join-room?id=' + room.id %>>
-                    <input type="submit" name="submit" value="Join room"/>
+                    <input id="" type="submit" name="submit" value="Join room"
+                    <% if (room.isFull()) { %>
+                        disabled
+                    <% } %>
+                    />
                 </form>
             </div>
         <% } %>
     </div>
-
 </body>
 
 </html>

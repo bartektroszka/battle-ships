@@ -46,10 +46,14 @@ export function joinRoom(req, res) {
     let room = getRoomById(roomId)
 
     console.log(`Player ${player.prettyPrint()} attempts to join room ${room}`)
-    room.insertPlayer(player)
-    console.log(`Player ${player.prettyPrint()} joined room ${room}`)
-
-    res.redirect('/room?id=' + room.id)
+    try {
+        room.insertPlayer(player)
+        console.log(`Player ${player.prettyPrint()} joined room ${room}`)
+        res.redirect('/room?id=' + room.id)
+    } catch (err) {
+        console.log(`${player.prettyPrint()} failed to join with error "${err.message}"`)
+        res.redirect('/rooms')
+    }
 }
 
 export function room(req, res) {
