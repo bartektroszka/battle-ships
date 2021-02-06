@@ -40,6 +40,7 @@ function getPlayerFromSocket(socket) {
         let token = cookies.split('=')[1]
         return getPlayerByToken(token)
     } catch (err) {
+        console.log(`Unable to extract user token from socket connection.`)
         return null
     }
 }
