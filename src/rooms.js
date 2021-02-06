@@ -84,6 +84,11 @@ class Room {
         return this.players.map((player) => player.name).join(", ")
     }
 
+    endGame() {
+        console.log(`Deleting room ${this}`)
+        delete rooms[this.id]
+    }
+
     toString() {
         return `#${this.id}`
     }

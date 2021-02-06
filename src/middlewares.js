@@ -50,7 +50,6 @@ export function joinRoom(req, res) {
 
 export function room(req, res) {
     let roomId = req.query.id
-    let room = getRoomById(roomId)
     res.render('../frontend/index', {roomId})
 }
 
