@@ -1,6 +1,8 @@
 .grid div {
   width: 40px;
   height: 40px;
+  box-sizing: border-box;
+  border: 1px solid black;
 }
 
 .available {
@@ -46,6 +48,7 @@
   width: 400px;
   height: 400px;
   margin: 10px;
+  margin-top: 0px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -125,6 +128,26 @@
   display: inline-block;
 }
 
+.numbers {
+  display: flex;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.num-div {
+  text-align: center;
+  width: 40px;
+  height: 30px;
+}
+.letters {
+  display: block;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+.let-div {
+  text-align: center;
+  width: 20px;
+  height: 40px;
+}
 .long {
   width: 160px;
   height: 40px;
@@ -142,13 +165,13 @@
 .longest {
   width: 200px;
   height: 40px;
-  background-color: teal;
+  background-color: rgb(6, 80, 80);
   display: flex;
 }
 
 .longest-ver {
   width: 40px;
   height: 200px;
-  background-color: teal;
+  background-color: rgb(6, 80, 80);
   display: inline-block;
 }
