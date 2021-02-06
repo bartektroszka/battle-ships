@@ -5,7 +5,13 @@ import { getRooms, createRoom, getRoomById } from './rooms.js'
 export const playerTokenCookieName = 'player-token'
 
 export function root(req, res) {
-    res.render('login', {'invalidUsername': false})
+    let playerToken = req.cookies[playerTokenCookieName]
+    if (playerToken) {
+        res.redirect('/rooms')
+    } else {
+        res.render('login', {'invalidUsername': false})
+    }
+
 }
 
 export function login(req, res) {
