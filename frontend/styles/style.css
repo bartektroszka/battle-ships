@@ -1,0 +1,154 @@
+.grid div {
+  width: 40px;
+  height: 40px;
+}
+
+.available {
+  width: 40px;
+  height: 40px;
+  background-color: seagreen;
+  display: flex;
+}
+
+.shot {
+  width: 40px;
+  height: 40px;
+  background-color: red;
+  display: flex;
+}
+
+.miss {
+  width: 40px;
+  height: 40px;
+  background-color: rgb(207, 140, 140);
+  display: flex;
+}
+
+.container {
+  display: flex;
+  margin: 10px;
+}
+
+.container-2 {
+  display: none;
+  margin: 10px;
+}
+
+.deploy-ships {
+  background-color: white;
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+}
+
+.your-ships {
+  background-color: rgb(107, 189, 175);
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid-user {
+  background-color: rgb(107, 189, 175);
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.grid-computer {
+  background-color: rgb(107, 189, 175);
+  width: 400px;
+  height: 400px;
+  margin: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ship div {
+  width: 40px;
+  height: 40px;
+}
+
+.taken div {
+  width: 40px;
+  height: 40px;
+}
+
+.ship-container {
+  margin: 10px;
+}
+
+.shortest {
+  width: 80px;
+  height: 40px;
+  display: flex;
+  background-color: hotpink;
+}
+
+.shortest-ver {
+  width: 40px;
+  height: 80px;
+  background-color: hotpink;
+  flex-wrap: wrap;
+  display: inline-block;
+}
+
+.short {
+  width: 120px;
+  height: 40px;
+  background-color: yellow;
+  display: flex;
+}
+
+.short-ver {
+  width: 40px;
+  height: 120px;
+  background-color: yellow;
+  display: inline-block;
+}
+
+.short2 {
+  width: 120px;
+  height: 40px;
+  background-color: fuchsia;
+  display: flex;
+}
+
+.short2-ver {
+  width: 40px;
+  height: 120px;
+  background-color: fuchsia;
+  display: inline-block;
+}
+
+.long {
+  width: 160px;
+  height: 40px;
+  background-color: black;
+  display: flex;
+}
+
+.long-ver {
+  width: 40px;
+  height: 160px;
+  background-color: black;
+  display: inline-block;
+}
+
+.longest {
+  width: 200px;
+  height: 40px;
+  background-color: teal;
+  display: flex;
+}
+
+.longest-ver {
+  width: 40px;
+  height: 200px;
+  background-color: teal;
+  display: inline-block;
+}
