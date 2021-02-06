@@ -44,42 +44,43 @@
         </div>
         <div class="grid your-ships"></div>
       </div>
-      <div class="deploy-ships">
-        <div class="ship shortest" length="2" draggable="true">
-          <div id="shortest-0"></div>
-          <div id="shortest-1"></div>
+      <div class="container-3">
+        <div class="deploy-ships">
+          <div class="ship shortest" length="2" draggable="true">
+            <div class="left-end" id="shortest-0"></div>
+            <div id="shortest-1"></div>
+          </div>
+          <div class="ship short" length="3" draggable="true">
+            <div id="short-0"></div>
+            <div id="short-1"></div>
+            <div id="short-2"></div>
+          </div>
+          <div class="ship short2" length="3" draggable="true">
+            <div id="short2-0"></div>
+            <div id="short2-1"></div>
+            <div id="short2-2"></div>
+          </div>
+          <div class="ship long" length="4" draggable="true">
+            <div id="long-0"></div>
+            <div id="long-1"></div>
+            <div id="long-2"></div>
+            <div id="long-3"></div>
+          </div>
+          <div class="ship longest" length="5" draggable="true">
+            <div id="longest-0"></div>
+            <div id="longest-1"></div>
+            <div id="longest-2"></div>
+            <div id="longest-3"></div>
+            <div id="longest-4"></div>
+          </div>
         </div>
-        <div class="ship short" length="3" draggable="true">
-          <div id="short-0"></div>
-          <div id="short-1"></div>
-          <div id="short-2"></div>
-        </div>
-        <div class="ship short2" length="3" draggable="true">
-          <div id="short2-0"></div>
-          <div id="short2-1"></div>
-          <div id="short2-2"></div>
-        </div>
-        <div class="ship long" length="4" draggable="true">
-          <div id="long-0"></div>
-          <div id="long-1"></div>
-          <div id="long-2"></div>
-          <div id="long-3"></div>
-        </div>
-        <div class="ship longest" length="5" draggable="true">
-          <div id="longest-0"></div>
-          <div id="longest-1"></div>
-          <div id="longest-2"></div>
-          <div id="longest-3"></div>
-          <div id="longest-4"></div>
+        <div class="hidden-info">
+          <button id="start">Start Game</button>
+          <button id="rotate">Rotate Your Ships</button>
+          <h3 id="whose-go">Place all of your ships on the board.</h3>
+          <h3 id="info"></h3>
         </div>
       </div>
-    </div>
-
-    <div class="hidden-info">
-      <button id="start">Start Game</button>
-      <button id="rotate">Rotate Your Ships</button>
-      <h3 id="whose-go">Place all of your ships on the board.</h3>
-      <h3 id="info"></h3>
     </div>
   </body>
 </html>

@@ -65,7 +65,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let y1 = id1 % width;
     let x2 = Math.floor(id2 / width);
     let y2 = id2 % width;
-    console.log("X");
     if (Math.abs(x1 - x2) <= 1 && Math.abs(y1 - y2) <= 1) {
       return true;
     }
@@ -112,6 +111,32 @@ document.addEventListener("DOMContentLoaded", () => {
           "taken",
           draggedShipInList.name
         );
+        if (i == 0) {
+          //topend
+          if (vertical) {
+            userFields[parseInt(shipBeginId) + i * step].classList.add(
+              "top-end",
+              draggedShipInList.name
+            );
+          } else {
+            userFields[parseInt(shipBeginId) + i * step].classList.add(
+              "left-end",
+              draggedShipInList.name
+            );
+          }
+        } else if (i == shipLength - 1) {
+          if (vertical) {
+            userFields[parseInt(shipBeginId) + i * step].classList.add(
+              "bot-end",
+              draggedShipInList.name
+            );
+          } else {
+            userFields[parseInt(shipBeginId) + i * step].classList.add(
+              "right-end",
+              draggedShipInList.name
+            );
+          }
+        }
       }
       displayGrid.removeChild(draggedShip);
       if (!displayGrid.querySelector(".ship")) {

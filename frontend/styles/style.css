@@ -35,12 +35,16 @@
   display: none;
   margin: 10px;
 }
+.container-3 {
+  margin-left: 50px;
+}
 
 .deploy-ships {
   background-color: white;
   width: 400px;
-  height: 400px;
+  height: 250px;
   margin: 10px;
+  margin-top: 120px;
 }
 
 .your-ships {
@@ -91,6 +95,9 @@
   display: flex;
   background-color: hotpink;
 }
+.deploy-ships .shortest {
+  border-radius: 25px;
+}
 
 .shortest-ver {
   width: 40px;
@@ -99,12 +106,18 @@
   flex-wrap: wrap;
   display: inline-block;
 }
+.deploy-ships .shortest-ver {
+  border-radius: 25px;
+}
 
 .short {
   width: 120px;
   height: 40px;
   background-color: yellow;
   display: flex;
+}
+.deploy-ships .short {
+  border-radius: 25px;
 }
 
 .short-ver {
@@ -113,6 +126,9 @@
   background-color: yellow;
   display: inline-block;
 }
+.deploy-ships .short-ver {
+  border-radius: 25px;
+}
 
 .short2 {
   width: 120px;
@@ -120,12 +136,17 @@
   background-color: fuchsia;
   display: flex;
 }
-
+.deploy-ships .short2 {
+  border-radius: 25px;
+}
 .short2-ver {
   width: 40px;
   height: 120px;
   background-color: fuchsia;
   display: inline-block;
+}
+.deploy-ships .short2-ver {
+  border-radius: 25px;
 }
 
 .numbers {
@@ -155,18 +176,27 @@
   display: flex;
 }
 
+.deploy-ships .long {
+  border-radius: 25px;
+}
+
 .long-ver {
   width: 40px;
   height: 160px;
   background-color: black;
   display: inline-block;
 }
-
+.deploy-ships .long-ver {
+  border-radius: 25px;
+}
 .longest {
   width: 200px;
   height: 40px;
   background-color: rgb(6, 80, 80);
   display: flex;
+}
+.deploy-ships .longest {
+  border-radius: 25px;
 }
 
 .longest-ver {
@@ -174,4 +204,20 @@
   height: 200px;
   background-color: rgb(6, 80, 80);
   display: inline-block;
+}
+.deploy-ships .longest-ver {
+  border-radius: 25px;
+}
+.right-end {
+  border-radius: 0px 25px 25px 0px !important;
+}
+
+.left-end {
+  border-radius: 25px 0px 0px 25px !important;
+}
+.top-end {
+  border-radius: 25px 25px 0px 0px;
+}
+.bot-end {
+  border-radius: 0px 0px 25px 25px;
 }
