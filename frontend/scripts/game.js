@@ -322,14 +322,19 @@ document.addEventListener("DOMContentLoaded", () => {
     // TODO: do something cool when hitInfo.destroyed (meaning the ship was destroyed)
   });
 
+  const endGame = () => {
+      let baseUrl = window.location.origin;
+      window.location.replace(baseUrl + '/rooms');
+  };
+
   socket.on("gameWon", () => {
     window.alert("You have won!");
-    // TODO: do something more
+    endGame();
   });
 
   socket.on("gameLost", () => {
     window.alert("You have lost the game :(");
-    // TODO: do something more
+    endGame();
   });
 
   userFields.forEach((field) => field.addEventListener("dragstart", dragStart));

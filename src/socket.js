@@ -18,8 +18,12 @@ export function socketHandler(socket) {
 
     socket.on('roomId', (id) => {
         roomId = id
-        console.log(`${player.prettyPrint()} connected via socket to room #${roomId}`)
         let room = getRoomById(roomId)
+        if (!room) {
+            return
+        }
+        console.log(`${player.prettyPrint()} connected via socket to room #${roomId}`)
+
         if (room.hasPlayer(player)) {
             room.assignSocketForPlayer(player, socket)
             handleGame(socket, player, room)
