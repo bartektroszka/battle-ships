@@ -3,8 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <title>Battle Ships</title>
+    <link rel="shortcut icon" href="/public/favicon.ico">
     <link rel="stylesheet" href="styles/style.css" />
-    <script src="scripts/setup.js" charset="utf-8"></script>
+    <script src="scripts/game.js" charset="utf-8"></script>
   </head>
   <body>
     <script src="/socket.io/socket.io.js"></script>
@@ -76,8 +77,8 @@
     </div>
 
     <div class="hidden-info">
-      <button id="start">Start Game</button>
       <button id="rotate">Rotate Your Ships</button>
+      <button id="start">Start Game</button>
       <h3 id="whose-go">Place all of your ships on the board.</h3>
       <h3 id="info"></h3>
     </div>

@@ -223,6 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (expectingSetup) {
       socket.emit("setupDone", collectSetup());
       startButton.style.display = "none";
+      rotateButton.style.display = "none";
     }
   };
 

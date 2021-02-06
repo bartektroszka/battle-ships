@@ -27,6 +27,10 @@ export function login(req, res) {
     }
 }
 
+export function logAgain(req, res) {
+    res.render('login', {'invalidUsername': false})
+}
+
 export function makeRoom(req, res) {
     let roomName = req.body.roomName
     let room = createRoom(roomName)
