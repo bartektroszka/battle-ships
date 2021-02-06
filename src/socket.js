@@ -2,6 +2,7 @@ import { playerTokenCookieName } from './middlewares.js'
 import { getPlayerByToken } from './player.js'
 import { handleGame } from './game.js'
 import { getRoomById } from './rooms.js'
+import cookie from 'cookie'
 
 
 export function socketHandler(socket) {
@@ -16,7 +17,7 @@ export function socketHandler(socket) {
 
     let roomId = null
 
-    socket.on('roomId', (id) => {
+    socket.on('roomId', (id, token) => {
         roomId = id
         let room = getRoomById(roomId)
         if (!room) {
@@ -40,8 +41,8 @@ export function socketHandler(socket) {
 
 function getPlayerFromSocket(socket) {
     try {
-        let cookies = socket.handshake.headers.cookie
-        let token = cookies.split('=')[1]
+        let cookies = cookie.parse(socket.handshake.headers.cookie)
+        let token = cookies['player-token']
         return getPlayerByToken(token)
     } catch (err) {
         console.log(`Unable to extract user token from socket connection.`)
