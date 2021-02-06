@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const computerGameGrid = document.querySelector(".grid-computer");
   const rotateButton = document.querySelector("#rotate");
   const startButton = document.querySelector("#start");
-  const whoseGo = document.querySelector("#whose-go")
+  const whoseGo = document.querySelector("#whose-go");
   const width = 10;
   const fieldWidth = 40;
   let vertical = false;
@@ -60,10 +60,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
+  const neighDistance = (id1, id2) => {
+    let x1 = Math.floor(id1 / width);
+    let y1 = id1 % width;
+    let x2 = Math.floor(id2 / width);
+    let y2 = id2 % width;
+    console.log("X");
+    if (Math.abs(x1 - x2) <= 1 && Math.abs(y1 - y2) <= 1) {
+      return true;
+    }
+    return false;
+  };
   const shipsCollide = (shipOne, shipTwo) => {
-    return (
-      shipOne.takenIds.filter((value) => shipTwo.takenIds.includes(value)) != 0
-    );
+    for (let i = 0; i < shipOne.takenIds.length; i++) {
+      for (let j = 0; j < shipTwo.takenIds.length; j++) {
+        if (neighDistance(shipOne.takenIds[i], shipTwo.takenIds[j])) {
+          return true;
+        }
+      }
+    }
+    return false;
   };
 
   const dragAllowed = (shipBeginId, shipLastId) => {
@@ -177,9 +193,9 @@ document.addEventListener("DOMContentLoaded", () => {
       board.push([]);
       for (let col = 0; col < width; col++) {
         let target = userGrid.childNodes.item(`${row * 10 + col}`);
-        let shipName = target.className.split(" ").pop()
+        let shipName = target.className.split(" ").pop();
         if (shipName != "") {
-          let tile = { shipName, hit : false}
+          let tile = { shipName, hit: false };
           board[row].push(tile);
         } else {
           board[row].push(null);
@@ -187,7 +203,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
     return board;
-  }
+  };
 
   let myMove = false;
   let expectingSetup = false;
@@ -205,23 +221,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const sendSetup = () => {
     if (expectingSetup) {
-      socket.emit('setupDone', collectSetup())
-      startButton.style.display = "none"
+      socket.emit("setupDone", collectSetup());
+      startButton.style.display = "none";
     }
   };
 
-  socket.on('expectingSetup', () => {
+  socket.on("expectingSetup", () => {
     expectingSetup = true;
   });
 
-  socket.on('waitForOtherPlayer', () => {
-    whoseGo.innerHTML = "Waiting for the other player"
+  socket.on("waitForOtherPlayer", () => {
+    whoseGo.innerHTML = "Waiting for the other player";
   });
 
-  socket.on('bothPlayersReady', () => {
+  socket.on("bothPlayersReady", () => {
     const shootEnemy = (e) => {
       if (!myMove) {
-        window.alert("You can't make a move at this moment. It's your opponent's turn.")
+        window.alert(
+          "You can't make a move at this moment. It's your opponent's turn."
+        );
         return;
       }
 
@@ -230,12 +248,12 @@ document.addEventListener("DOMContentLoaded", () => {
       let row = Math.floor(id / 10);
       let col = id % 10;
 
-      whoseGo.innerHTML = "Opponent's turn"
-      socket.emit('shot', { row, col })
+      whoseGo.innerHTML = "Opponent's turn";
+      socket.emit("shot", { row, col });
     };
 
-    whoseGo.innerHTML = "Opponent's turn"
-    window.alert("Your opponent is ready")
+    whoseGo.innerHTML = "Opponent's turn";
+    window.alert("Your opponent is ready");
     enemyBoard.style.display = "flex";
     createBoard(computerGameGrid, computerGameFields);
     computerGameFields.forEach((field) =>
@@ -243,30 +261,30 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   });
 
-  socket.on('makeMove', () => {
-    whoseGo.innerHTML = "Your turn"
+  socket.on("makeMove", () => {
+    whoseGo.innerHTML = "Your turn";
     myMove = true;
   });
 
-  socket.on('hit', (hitInfo) => {
+  socket.on("hit", (hitInfo) => {
     // TODO: make use of hitInfo to mark the hit on the enemy board
     let id = hitInfo.row * 10 + hitInfo.col;
     computerGameGrid.childNodes.item(id).setAttribute("class", "shot");
     // TODO: set enemy board tile as hit
   });
 
-  socket.on('miss', (shotInfo) => {
+  socket.on("miss", (shotInfo) => {
     let id = shotInfo.row * 10 + shotInfo.col;
     // TODO: czemu tu kurwa jest to samo co w hit?
     // TODO: display some miss animation?
     computerGameGrid.childNodes.item(id).setAttribute("class", "miss");
   });
 
-  socket.on('opponentMiss', (shotInfo) => {
+  socket.on("opponentMiss", (shotInfo) => {
     // TODO: display some miss animation?
   });
 
-  socket.on('opponentHit', (hitInfo) => {
+  socket.on("opponentHit", (hitInfo) => {
     let row = hitInfo.row;
     let col = hitInfo.col;
     let target = userGrid.childNodes.item(`${row * 10 + col}`);
@@ -278,12 +296,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // TODO: do something cool when hitInfo.destroyed (meaning the ship was destroyed)
   });
 
-  socket.on('gameWon', () => {
+  socket.on("gameWon", () => {
     window.alert("You have won!");
     // TODO: do something more
   });
 
-  socket.on('gameLost', () => {
+  socket.on("gameLost", () => {
     window.alert("You have lost the game :(");
     // TODO: do something more
   });
@@ -303,5 +321,3 @@ document.addEventListener("DOMContentLoaded", () => {
   startButton.addEventListener("click", sendSetup);
   startButton.disabled = true;
 });
-
-
