@@ -31,6 +31,7 @@ app.get('/join-room', joinRoom)
 
 io.on('connection', socketHandler)
 
-server.listen(config.port, () => {
-    console.log('Listening on port ' + config.port)
+const port = process.env.PORT || config.port
+server.listen(port, () => {
+    console.log('Listening on port ' + port)
 })
