@@ -27,7 +27,7 @@ export function createTokenForPlayer(name) {
     do {
         let randomNumber = Math.random() * 1000000
         token = crypto.MD5(name + randomNumber).toString()
-    } while (token in playersByToken)
+    } while (playerExists(token))
 
     playersByToken[token] = new Player(name, token)
 
@@ -35,9 +35,13 @@ export function createTokenForPlayer(name) {
 }
 
 export function getPlayerByToken(token) {
-    if (token in playersByToken) {
+    if (playerExists(token)) {
         return playersByToken[token]
     } else {
         throw new Error('Player token is not valid (' + token + ')')
     }
+}
+
+export function playerExists(token) {
+    return token in playersByToken
 }

@@ -1,4 +1,4 @@
-import { isUsernameValid, createTokenForPlayer, getPlayerByToken } from './player.js'
+import { isUsernameValid, createTokenForPlayer, getPlayerByToken, playerExists } from './player.js'
 import { getRooms, createRoom, getRoomById } from './rooms.js'
 
 
@@ -9,7 +9,7 @@ export function root(req, res) {
     if (playerToken) {
         res.redirect('/rooms')
     } else {
-        res.render('login', {'invalidUsername': false})
+        res.render('login', {'errorMessage': ''})
     }
 
 }
@@ -23,15 +23,21 @@ export function login(req, res) {
         res.cookie(playerTokenCookieName, token)
         res.redirect('/rooms')
     } else {
-        res.render('login', {'invalidUsername': true})
+        let errorMessage = 'Invalid username. Name can only contain letters and digits.'
+        res.render('login', {errorMessage})
     }
 }
 
 export function logAgain(req, res) {
-    res.render('login', {'invalidUsername': false})
+    res.render('login', {errorMessage: ''})
 }
 
 export function makeRoom(req, res) {
+    let playerToken = req.cookies[playerTokenCookieName]
+    if (!assertSessionIsValid(res, playerToken)) {
+        return
+    }
+
     let roomName = req.body.roomName
     let room = createRoom(roomName)
     console.log(`Room ${room} ("${roomName}") was created`)
@@ -41,6 +47,10 @@ export function makeRoom(req, res) {
 
 export function joinRoom(req, res) {
     let playerToken = req.cookies[playerTokenCookieName]
+    if (!assertSessionIsValid(res, playerToken)) {
+        return
+    }
+
     let player = getPlayerByToken(playerToken)
     let roomId = req.query.id
     let room = getRoomById(roomId)
@@ -57,10 +67,23 @@ export function joinRoom(req, res) {
 }
 
 export function room(req, res) {
+    if (!assertSessionIsValid(res, req.cookies[playerTokenCookieName])){
+        return
+    }
     let roomId = req.query.id
     res.render('../frontend/index', {roomId})
 }
 
 export function rooms(req, res) {
     res.render('rooms', {rooms: getRooms()})
+}
+
+function assertSessionIsValid(response, playerToken) {
+    if (!playerToken || !playerExists(playerToken)) {
+        console.log(`Detected an invalid session with token "${playerToken}"`)
+        let errorMessage = 'Your session has expired. Please choose your name again'
+        response.render('login', {errorMessage})
+        return false
+    }
+    return true
 }

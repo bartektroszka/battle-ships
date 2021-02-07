@@ -12,7 +12,7 @@ import { socketHandler } from './socket.js'
 
 const app = express()
 const server = http.Server(app)
-const io = new socketIO.Server(server);
+const io = new socketIO.Server(server)
 
 app.set('view engine', 'ejs')
 app.set('views', './views')
