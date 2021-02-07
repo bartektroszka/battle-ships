@@ -67,11 +67,18 @@ export function joinRoom(req, res) {
 }
 
 export function room(req, res) {
-    if (!assertSessionIsValid(res, req.cookies[playerTokenCookieName])){
+    let token = req.cookies[playerTokenCookieName]
+    if (!assertSessionIsValid(res, token)){
         return
     }
-    let roomId = req.query.id
-    res.render('../frontend/index', {roomId})
+
+    let room = getRoomById(req.query.id)
+    let player = getPlayerByToken(token)
+    if (!room.hasPlayer(player)) {
+        res.redirect('/rooms')
+    }
+
+    res.render('../frontend/index', {roomId: room.id})
 }
 
 export function rooms(req, res) {

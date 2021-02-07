@@ -72,6 +72,22 @@ class Room {
         return this.players.includes(player)
     }
 
+    removePlayer(player) {
+        if (this.hasPlayer(player)) {
+            delete this.isReady[player]
+            this.players = this.players.filter(p => p != player)
+            if (this.isEmpty()) {
+                this.endGame()
+            }
+        } else {
+            console.log(`Attempt to remove nonexistent ${player.prettyPrint()} from room ${this}`)
+        }
+    }
+
+    isEmpty() {
+        return this.players.length == 0
+    }
+
     makePlayerReady(player) {
         this.isReady[player] = true
     }

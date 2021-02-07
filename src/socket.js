@@ -13,8 +13,6 @@ export function socketHandler(socket) {
         return
     }
 
-    // TODO: fail to connect if the game is already in progress maybe?
-
     let roomId = null
 
     socket.on('roomId', (id, token) => {
@@ -31,11 +29,6 @@ export function socketHandler(socket) {
         } else {
             console.log("Rejected the connection. User was not in the target room")
         }
-    })
-
-    socket.on('disconnect', () => {
-        // TODO: remove player from room and award win to opponent
-        console.log(`${player.prettyPrint()} surrendered the match in room ${roomId}.'`)
     })
 }
 

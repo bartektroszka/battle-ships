@@ -1,6 +1,11 @@
 export function handleGame(socket, player, room) {
     socket.emit('expectingSetup')
 
+    socket.on('disconnect', () => {
+        console.log(`${player.prettyPrint()} left the room ${room}.`)
+        room.removePlayer(player)
+    })
+
     socket.on('setupDone', (setup) => {
         console.log(`Received setup from player ${player.prettyPrint()} for room ${room}`)
 
@@ -44,9 +49,11 @@ function playGame(room) {
                 otherSocket.emit('opponentHit', hit)
 
                 if (room.hasPlayerWon(player)) {
+                    socket.removeAllListeners('disconnect')
+                    otherSocket.removeAllListeners('disconnect')
                     console.log(`Player ${player} has won the game in room ${room}`)
-                    socket.emit('gameWon')
                     otherSocket.emit('gameLost')
+                    socket.emit('gameWon')
                     room.endGame()
                 } else {
                     socket.emit('makeMove')
@@ -55,6 +62,12 @@ function playGame(room) {
         }
 
         socket.on('shot', shotHandler)
+
+        socket.on('disconnect', () => {
+            console.log(`${player.prettyPrint()} surrendered the match in room ${room}.'`)
+            otherSocket.emit('gameWon', {reason: 'Opponent surrendered the game.'})
+            socket.emit('gameLost', {reason: 'You left the game.'})
+        })
     }
 
     setHandlersForPlayer(socketA, playerA, socketB, playerB)

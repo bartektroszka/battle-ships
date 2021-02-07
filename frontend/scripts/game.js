@@ -327,13 +327,17 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.replace(baseUrl + '/rooms');
   };
 
-  socket.on("gameWon", () => {
-    window.alert("You have won!");
+  const getReasoning = (data) => {
+      return data ? `(${data.reason})` : ""
+  }
+
+  socket.on("gameWon", (data) => {
+    window.alert("You have won!" + getReasoning(data));
     endGame();
   });
 
-  socket.on("gameLost", () => {
-    window.alert("You have lost the game :(");
+  socket.on("gameLost", (data) => {
+    window.alert("You have lost the game :(" + getReasoning(data));
     endGame();
   });
 
