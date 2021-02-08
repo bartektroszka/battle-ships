@@ -7,30 +7,76 @@
     <title>Room list</title>
 </head>
 
+<style>
+.box {
+    margin: auto;
+    margin-top: 10px;
+    width: 50%;
+    background-color: rgb(173, 171, 171);
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.input {
+    height: 30px;
+    border-radius: 10px;
+    width: 200px;
+    outline: none;
+}
+
+.label {
+    font-size: 110%;
+}
+
+.button {
+    border-radius: 10px;
+    border-color: gray;
+    outline: none;
+    background-color: rgb(50, 192, 50);
+}
+
+.rooms {
+    display: grid;
+}
+
+.room-name {
+    font-weight: bold;
+}
+
+.room-members {
+    font-weight: bold;
+}
+
+.room {
+    outline-style: dotted;
+    margin: 10px;
+    padding: 10px;
+    background-color: whitesmoke;
+}
+</style>
+
 <body>
-    <form method='post' action='/relog'>
-        Choose a new username:
-        <input type="submit" name="submit" value="Go to login">
+    <form class="box" method='post' action='/relog'>
+        <input class="button" type="submit" name="submit" value="Choose a new username">
     </form>
 
-    <form method='post' action='/make-room'>
-        Create a new room:
-        <input type="text" name="roomName" placeholder="Room name (optional)"/>
-        <input type="submit" name="submit" value="Create room"/>
+    <form class="box" method='post' action='/make-room'>
+        <input class="label" type="text" name="roomName" placeholder="Room name (optional)"/>
+        <input class="button" type="submit" name="submit" value="Create room"/>
     </form>
 
-    <form method='get' action='/rooms'>
-        <input type="submit" name="submit" value="Refresh">
-    </form>
-
-    <div>
-        Existing rooms (refresh to see more):
+    <div class="box rooms">
+        <form method='get' action='/rooms'>
+            <input class="button" type="submit" name="submit" value="Refresh">
+        </form>
+        <span>Existing rooms (refresh to see more):</span>
         <% for (let room of rooms) {%>
             <div class="room">
                 <div class="room-name"><%= room.name %></div>
-                <div class="room-members"><%= room.members() %></div>
+                <div class="room-members">Players: <%= room.members() %></div>
                 <form method='post' action=<%= '/join-room?id=' + room.id %>>
-                    <input id="" type="submit" name="submit" value="Join room"
+                    <input class="button" type="submit" name="submit" value="Join room"
                     <% if (room.isFull()) { %>
                         disabled
                     <% } %>
