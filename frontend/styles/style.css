@@ -217,17 +217,22 @@
 }
 .deploy-ships .longest-ver {
   border-radius: 25px;
+  outline: none;
 }
 .right-end {
   border-radius: 0px 25px 25px 0px;
+  outline: none;
 }
 
 .left-end {
   border-radius: 25px 0px 0px 25px;
+  outline: none;
 }
 .top-end {
   border-radius: 25px 25px 0px 0px;
+  outline: none;
 }
 .bot-end {
   border-radius: 0px 0px 25px 25px;
+  outline: none;
 }
