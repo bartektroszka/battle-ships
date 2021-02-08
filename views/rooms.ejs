@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room list</title>
+    <title>Battleships</title>
 </head>
 
 <style>
@@ -23,10 +23,6 @@
     border-radius: 10px;
     width: 200px;
     outline: none;
-}
-
-.label {
-    font-size: 110%;
 }
 
 .button {
@@ -62,7 +58,7 @@
     </form>
 
     <form class="box" method='post' action='/make-room'>
-        <input class="label" type="text" name="roomName" placeholder="Room name (optional)"/>
+        <input type="text" name="roomName" placeholder="Room name (optional)"/>
         <input class="button" type="submit" name="submit" value="Create room"/>
     </form>
 

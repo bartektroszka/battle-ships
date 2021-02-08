@@ -4,20 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Battleships</title>
 </head>
 
 <style>
-    .error-message {
-        color: red
-    }
+.error-message {
+    color: red
+}
+
+.box {
+    margin: auto;
+    margin-top: 10px;
+    width: 50%;
+    background-color: rgb(173, 171, 171);
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+}
+
+.button {
+    border-radius: 10px;
+    border-color: gray;
+    outline: none;
+    background-color: rgb(50, 192, 50);
+}
 </style>
 
 <body>
-    <form action="/login" method="post">
+    <form class="box" action="/login" method="post">
         <label for="user_name">Enter your name:</label>
         <input id="user_name" type="text" name="userName" placeholder="Username"/>
-        <input type="submit" name="submit" value="Confirm"/>
+        <input class="button" type="submit" name="submit" value="Confirm"/>
     </form>
     <% if (errorMessage != '') { %>
         <div class="error-message"> <%= errorMessage %> </div>
