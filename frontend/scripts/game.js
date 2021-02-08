@@ -308,6 +308,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   socket.on("opponentMiss", (shotInfo) => {
     // TODO: display some miss animation?
+    let id = shotInfo.row * 10 + shotInfo.col;
+    userGrid.childNodes.item(id).setAttribute("class", "miss")
   });
 
   socket.on("opponentHit", (hitInfo) => {
